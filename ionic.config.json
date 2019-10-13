@@ -1,0 +1,7 @@
+{
+  "name": "EWI-USB Config",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

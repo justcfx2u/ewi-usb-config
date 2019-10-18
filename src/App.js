@@ -180,14 +180,11 @@ function App() {
   const updateControls = (event) => {
     //console.log(["updateControls",event]);
 
-    // avoid "Object is possibly 'null'" (thanks, TypeScript!)
-    if (event.target === null) return;
-
     // clone existing controls so value can be mutated, and React will know to re-draw component(s)
     let newval = Object.assign({}, controls);
 
     // mutate values
-    const target = event.target; // make 'target.name' valid by typecasting
+    const target = event.target;
     newval[target.name].value = event.detail.value;
     
     // update state with mutated values

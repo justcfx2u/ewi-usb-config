@@ -7,6 +7,13 @@ Hosted [on Firebase](https://ewi-usb-config.web.app) unless something happened.
 
 MIT licensed. See `LICENSE.txt` for details.
 
+Support & Compatibility
+-----------------------
+
+Please open a GitHub issue if you're having problems or want to make a suggestion.
+
+This was only tested on Chrome v77 on Windows 10. [Other browsers](https://caniuse.com/#feat=midi) most likely won't work even in 2019.
+
 Purpose
 -------
 

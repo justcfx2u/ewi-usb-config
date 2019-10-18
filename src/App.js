@@ -172,6 +172,7 @@ function App() {
     await engine.openMidiOut(midiOutDeviceName).and(function() { console.log("OK: out"); setMidiOutDevicePort(this); _out = true});
     
     if (_in && _out) {
+      console.log("MIDI devices opened.");
       setMidiDevicesOpen(true);
     }
   }
@@ -238,6 +239,7 @@ function App() {
   }
 
   const fetchData = () => {
+    console.log("fetchData");
     midiOutDevicePort//.send([0x63, 0x01, 0x62, 0x04, 0x06, 0x20])
     .send([0xF0, 0x47, 0x7F, 0x6D, 0x40, 0x00, 0x00, 0xF7])
     .send([0xF0, 0x47, 0x7F, 0x6D, 0x42, 0x00, 0x00, 0xF7])
@@ -320,6 +322,7 @@ function App() {
             <IonButton onClick={saveData} disabled={!midiDevicesOpen}>Save</IonButton>
             <IonButton onClick={setDefaults} disabled={!midiDevicesOpen}>Set to Defaults</IonButton>
             {items}
+            <h6>DISCLAIMER: This web site/software is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by <a href="https://akaipro.com/">Akai Professional</a>. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand. The information/data received and transmitted by this software was provided by independent observations from <a href="https://ewiusb.com/">EWIUSB.com</a> and is believed to be accurate and safe. However, THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</h6>
           </IonGrid>
         </IonContent>
       </IonPage>

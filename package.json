@@ -1,7 +1,7 @@
 {
   "name": "ewi-usb-config",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "dependencies": {
     "@capacitor/cli": "1.2.1",
     "@capacitor/core": "1.2.1",
@@ -43,5 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "description": "An Ionic project"
+  "license": "MIT",
+  "description": "EWI-USB Config"
 }

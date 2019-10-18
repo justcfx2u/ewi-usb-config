@@ -30,6 +30,13 @@ Usage
 11. When finished, close the browser completely (in the future, there might be a 'Close MIDI Devices')
 12. Open your MIDI-enabled Digital Audio Workstation (DAW) and enjoy your newly-configured device.
 
+Troubleshooting
+---------------
+
+If 'Fetch Data' or 'Save' doesn't seem to do anything, your device is probably in use by another application.
+
+Try unplugging your device, closing all MIDI applications, waiting a few seconds, plugging it back in, then reload the application until the device shows up, and try your configuration again.
+
 Installation
 ------------
 
@@ -60,4 +67,4 @@ This isn't supported yet. Probably through Ionic Capacitor and Electron.js. In t
 DISCLAIMER
 ==========
 
-    This web site/software is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by <a href="https://akaipro.com/">Akai Professional</a>. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand. The information/data received and transmitted by this software was provided by independent observations from <a href="https://ewiusb.com/">EWIUSB.com</a> and is believed to be accurate and safe. However, THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+This web site/software is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by [Akai Professional](https://akaipro.com/). All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand. The information/data received and transmitted by this software was provided by independent observations from [EWIUSB.com](https://ewiusb.com/) and is believed to be accurate and safe. However, THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

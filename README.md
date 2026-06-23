@@ -1,7 +1,7 @@
 EWI-USB Config
 ==============
 
-Configures a [particular device](https://www.akaipro.com/ewi-usb) through WebMIDI using [JZZ](https://jazz-soft.net/doc/JZZ/) with SysEx MIDI data provided by [EWIUSB.com](https://ewiusb.com). Uses [Ionic](https://ionicframework.com/) on [React](https://reactjs.org/).
+Configures a [particular device](https://www.akaipro.com/ewi-usb) through WebMIDI using [JZZ](https://jazz-soft.net/doc/JZZ/) with SysEx MIDI data provided by EWIUSB.com (R.I.P.). Uses [Ionic](https://ionicframework.com/) on [React](https://reactjs.org/).
 
 Hosted [on Firebase](https://ewi-usb-config.web.app) unless something happened.
 
@@ -47,24 +47,22 @@ Try unplugging your device, closing all MIDI applications, waiting a few seconds
 Installation
 ------------
 
-You'll need Node.js, npm, npx, and yarn because this is a JavaScript program.
+You'll need Node.js and yarn because this is a JavaScript program.
 
 1. yarn install
 
 Running in Dev Mode
 -------------------
 
-1. ionic serve
+1. yarn dev
 
 Building for the Web
 --------------------
 
-Build/update as a Progressive Web App (PWA).
-Assumes Firebase (and you probably need to be on the "firebase" branch if it still exists in this repository).
+Assumes Firebase.
 
-1. npx cap copy web
-2. ionic build --prod
-3. firebase deploy
+1. yarn build
+2. firebase deploy
 
 Building a Desktop App
 ----------------------

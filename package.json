@@ -2,34 +2,31 @@
   "name": "ewi-usb-config",
   "version": "1.0.0",
   "private": false,
+  "type": "module",
   "dependencies": {
-    "@capacitor/cli": "1.2.1",
-    "@capacitor/core": "1.2.1",
-    "@ionic/react": "^4.11.0",
-    "@ionic/react-router": "^4.11.0",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.12",
-    "@types/react": "^16.9.5",
-    "@types/react-dom": "^16.9.1",
-    "@types/react-router": "^5.1.1",
-    "@types/react-router-dom": "^5.1.0",
-    "ionicons": "^4.6.3",
-    "jzz": "^0.9.5",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-router": "^5.1.0",
-    "react-router-dom": "^5.1.0",
-    "react-scripts": "3.2.0",
-    "typescript": "3.6.3"
+    "@ionic/react": "^8.8.11",
+    "ionicons": "^8.0.13",
+    "jzz": "^1.9.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "eslint": "^10.5.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "vite": "^8.0.16"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "browserslist": {
     "production": [

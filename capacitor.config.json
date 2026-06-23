@@ -1,7 +1,0 @@
-{
-  "appId": "io.ionic.starter",
-  "appName": "EWI-USB Config",
-  "bundledWebRuntime": true,
-  "npmClient": "npm",
-  "webDir": "public"
-}

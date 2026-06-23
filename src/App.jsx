@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  setupIonicReact,
   IonApp,
   IonContent,
   IonHeader,
@@ -36,6 +37,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+setupIonicReact();
 
 function App() {
   const parameters = {
@@ -76,48 +79,34 @@ function App() {
   }
   const [controls, setControls] = useState(parameters);
   const [engine, setEngine] = useState(null); 
-  const [selectMidiIn, setSelectMidiIn] = useState([]);
-  const [selectMidiOut, setSelectMidiOut] = useState([]);
   const [midiInDeviceName, setMidiInDeviceName] = useState("");
   const [midiOutDeviceName, setMidiOutDeviceName] = useState("");
-  const [midiInDevicePort, setMidiInDevicePort] = useState(null);
+  const [_, setMidiInDevicePort] = useState(null);
   const [midiOutDevicePort, setMidiOutDevicePort] = useState(null);
   const [midiDevicesOpen, setMidiDevicesOpen] = useState(false);
 
+  // Initialize the JZZ WebMIDI engine on mount
   useEffect(() => {
-    async function initJZZ() {
-      if (engine === null) {
-        // console.log("engine === null")
-        setEngine(await JZZ.default({engine: "webmidi", sysex: true}));
-      } 
-    }
-    initJZZ();
+    let cancelled = false;
+    (async () => {
+      const e = await JZZ.default({ engine: "webmidi", sysex: true });
+      if (!cancelled) setEngine(e);
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
-    if (engine && selectMidiIn.length === 0) {
-      let inputs = ["None"];
-      engine.info().inputs.map((input) => {
-        return inputs.push(input.name);
-      });
-      setSelectMidiIn(inputs);
-    }
+  const selectMidiIn = useMemo(
+    () => engine ? ["None", ...engine.info().inputs.map((input) => input.name)] : [],
+    [engine]
+  );
+  const selectMidiOut = useMemo(
+    () => engine ? ["None", ...engine.info().outputs.map((output) => output.name)] : [],
+    [engine]
+  );
 
-    if (engine && selectMidiOut.length === 0) {
-      let outputs = ["None"];
-      engine.info().outputs.map((output) => {
-        return outputs.push(output.name);
-      });
-      setSelectMidiOut(outputs);
-    }
-
-    // try to set an autodetected default
-    if (midiInDeviceName === "" && selectMidiIn.indexOf('EWI-USB') > -1) {
-      setMidiInDeviceName('EWI-USB');
-    }
-
-    if (midiOutDeviceName === "" && selectMidiOut.indexOf('EWI-USB') > -1) {
-      setMidiOutDeviceName('EWI-USB');
-    }
-  }, [engine, selectMidiIn, selectMidiOut, midiInDeviceName, midiOutDeviceName]);
+  // EWI-USB fallback or existing selection
+  const effectiveMidiIn = midiInDeviceName || (selectMidiIn.includes('EWI-USB') ? 'EWI-USB' : '');
+  const effectiveMidiOut = midiOutDeviceName || (selectMidiOut.includes('EWI-USB') ? 'EWI-USB' : '');
 
   const receiveMIDI = (data) => {
     console.log("MIDI IN: " + data.toString());
@@ -165,11 +154,11 @@ function App() {
     setControls(newval);
   }
 
-  const openMidi = async (event) => {
+  const openMidi = async (_event) => {
     let _in = false;
     let _out = false;
-    await engine.openMidiIn(midiInDeviceName).and(function() { console.log("OK: in"); this.connect(receiveMIDI); setMidiInDevicePort(this); _in = true});
-    await engine.openMidiOut(midiOutDeviceName).and(function() { console.log("OK: out"); setMidiOutDevicePort(this); _out = true});
+    await engine.openMidiIn(effectiveMidiIn).and(function() { console.log("OK: in"); this.connect(receiveMIDI); setMidiInDevicePort(this); _in = true});
+    await engine.openMidiOut(effectiveMidiOut).and(function() { console.log("OK: out"); setMidiOutDevicePort(this); _out = true});
     
     if (_in && _out) {
       console.log("MIDI devices opened.");
@@ -250,6 +239,7 @@ function App() {
     // update state with mutated values
     setControls(newval);
   }
+  
   const saveData = () => {
     console.log(["saveData", controls]);
     midiOutDevicePort
@@ -301,17 +291,23 @@ function App() {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonTitle>EWI-USB Config</IonTitle>
+            <IonTitle>
+              EWI-USB Config{' '}
+              <small style={{ fontSize: '0.6em', fontWeight: 'normal' }}>
+                (Updated June 2026. Report bugs/issues{' '}
+                <a href="https://github.com/justcfx2u/ewi-usb-config/issues" target="_blank" rel="noopener noreferrer">here</a>.)
+              </small>
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
           <IonGrid fixed={true}>
             <IonLabel>MIDI IN</IonLabel>
-            <IonSelect name="midiInSelect" compareWith={compareDevice} onIonChange={changeDevice} value={midiInDeviceName === "" ? "EWI-USB" : midiInDeviceName}>
+            <IonSelect name="midiInSelect" compareWith={compareDevice} onIonChange={changeDevice} value={effectiveMidiIn}>
               {inputs}
             </IonSelect>
             <IonLabel>MIDI OUT</IonLabel>
-            <IonSelect name="midiOutSelect" compareWith={compareDevice} onIonChange={changeDevice} value={midiOutDeviceName === "" ? "EWI-USB" : midiOutDeviceName}>
+            <IonSelect name="midiOutSelect" compareWith={compareDevice} onIonChange={changeDevice} value={effectiveMidiOut}>
               {outputs}
             </IonSelect>
             <IonButton onClick={openMidi}>Open MIDI Devices</IonButton>
